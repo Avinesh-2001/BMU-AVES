@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMU-AVES Vehicle Management System</title>
+    <link rel="stylesheet" href="bmu.css" />
+    <script defer src="bmu.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="logo">
+          <img src="logo.png" alt="BMU-AVES logo" width="45" height="45" />
+          <h1>BMU-AVES</h1>
+        </div>
+        <nav>
+          <a href="/" class="btn btn-logout">
+            <img src="icon.png" alt="" />
+            <span>Log Out</span>
+          </a>
+        </nav>
+      </header>
+
+      <main class="main-content">
+        <section class="entry-forms">
+          <!-- Vehicle Entry Form -->
+          <div class="form-container entry-form">
+            <h2>Vehicle Entry</h2>
+            <form id="entry-form" onsubmit="handleEntrySubmit(event)">
+              <div class="form-row">
+                <input type="text" id="in_driver_name" placeholder="Driver's Name" required />
+                <input type="text" id="in_vehicle_number" placeholder="Vehicle Number" required />
+                <button type="button" class="btn btn-auto" onclick="auto_in_fill()">Auto Fill</button>
+              </div>
+              <div class="form-row">
+                <select id="in_category" required>
+                  <option value="" disabled selected>Select Category</option>
+                  <option value="Student">Student</option>
+                  <option value="Faculty">Faculty</option>
+                  <option value="Staff">Staff</option>
+                  <option value="Vendor">Vendor</option>
+                  <option value="Visitor">Visitor</option>
+                </select>
+                <input type="tel" id="in_mobile_number" placeholder="Mobile Number" pattern="[0-9]{10}" required />
+                <button type="submit" class="btn btn-submit">Submit Entry</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Vehicle Exit Form -->
+          <div class="form-container exit-form">
+            <h2>Vehicle Exit</h2>
+            <form id="exit-form" onsubmit="handleExitSubmit(event)">
+              <div class="form-row">
+                <input type="text" id="out_driver_name" placeholder="Driver's Name" required />
+                <input type="text" id="out_vehicle_number" placeholder="Vehicle Number" required />
+                <button type="button" class="btn btn-auto" onclick="auto_out_fill()">Auto Fill</button>
+              </div>
+              <div class="form-row">
+                <select id="out_category" required>
+                  <option value="" disabled selected>Select Category</option>
+                  <option value="Student">Student</option>
+                  <option value="Faculty">Faculty</option>
+                  <option value="Staff">Staff</option>
+                  <option value="Vendor">Vendor</option>
+                  <option value="Visitor">Visitor</option>
+                </select>
+                <input type="tel" id="out_mobile_number" placeholder="Mobile Number" pattern="[0-9]{10}" required />
+                <button type="submit" class="btn btn-submit">Submit Exit</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <aside class="sidebar">
+          <div class="downloads-panel">
+            <h3>Download Records</h3>
+            <div class="download-options">
+              <div class="download-item">
+                <span>Daily Record</span>
+                <button onclick="download_daily_csv()" class="btn btn-download" aria-label="Download daily record">
+                  <img src="download.png" alt="" width="25" height="25" />
+                </button>
+              </div>
+              <div class="download-item">
+                <span>Weekly Record</span>
+                <button onclick="download_weekly_csv()" class="btn btn-download" aria-label="Download weekly record">
+                  <img src="download.png" alt="" width="25" height="25" />
+                </button>
+              </div>
+              <div class="download-item">
+                <span>Monthly Record</span>
+                <button onclick="download_monthly_csv()" class="btn btn-download" aria-label="Download monthly record">
+                  <img src="download.png" alt="" width="25" height="25" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats-panel">
+            <table aria-label="Vehicle Statistics">
+              <tr>
+                <th scope="row">Total Entries</th>
+                <td id="total_in">0</td>
+              </tr>
+              <tr>
+                <th scope="row">Total Exits</th>
+                <td id="total_out">0</td>
+              </tr>
+            </table>
+          </div>
+        </aside>
+
+        <section class="entries-section">
+          <div class="search-panel">
+            <form id="search-form" class="search-form" onsubmit="handleSearch(event)">
+              <input type="text" placeholder="Driver's Name" id="search_driver" />
+              <input type="text" placeholder="Vehicle Number" id="search_vehicle" />
+              <select id="search_category">
+                <option value="">All Categories</option>
+                <option value="Student">Student</option>
+                <option value="Faculty">Faculty</option>
+                <option value="Staff">Staff</option>
+                <option value="Vendor">Vendor</option>
+                <option value="Visitor">Visitor</option>
+              </select>
+              <input type="tel" placeholder="Mobile Number" id="search_mobile" pattern="[0-9]{10}" />
+              <button type="submit" class="btn btn-search">
+                <img src="search.png" alt="" width="20" height="20" />
+                Search
+              </button>
+            </form>
+          </div>
+
+          <div class="table-container">
+            <table id="entry_table" aria-label="Vehicle Entry Records">
+              <caption>Recent Entries</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Driver's Name</th>
+                  <th scope="col">Vehicle Number</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Mobile Number</th>
+                  <th scope="col">Entry Time</th>
+                  <th scope="col">Exit Time</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
