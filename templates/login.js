@@ -6,7 +6,7 @@ function verify_credentials() {
   // Check if either username or password is empty
   if (!username || !password) {
     // Redirect to bmu.html if any field is empty
-    window.location.href = "bmu.html";
+    window.location.href = "templates/bmu.html";
     return false; // Prevent further execution
   }
 
